@@ -112,7 +112,54 @@
     \begin{equation}
       \det M = L(L^2 - \sigma_{\chi}^2 k^2)
     \end{equation}
+  \item 如果$\det M \neq 0$, 我们可以得到$M$的逆矩阵:
+    \begin{equation} \footnotesize
+    M^{-1} = \frac{1}{\det M} \mqty(L^2-\sigma^2_{\chi}k^2_x & iL\sigma_{chi}k_z-\sigma^2_{\chi}k_xk_y & -iL\sigma_{\chi}k_y-\sigma^2_{\chi}k_xk_z\\
+                                    -iL\sigma_{\chi}k_z-\sigma^2_{\chi}k_xk_y & L^2-\sigma^2_{\chi}k^2_y & iL\sigma_{\chi}k_x-\sigma^2_{\chi}k_yk_z\\
+                                    iL\sigma_{\chi}k_y-\sigma^2_{\chi}k_xk_z & -iL\sigma_{\chi}k_x-\sigma^2_{\chi}k_yk_z & L^2-\sigma^2_{\chi}k^2_z)
+    \end{equation}
 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+  \item 利用上式, 我们可以将$\vb{F}(\omega,\vb{k})$解出:
+  \begin{equation} \footnotesize \label{eq:10}
+    \vb{F}(\omega,\vb{k}) = \frac{1}{L^2-\sigma^2_{\chi}k^2}
+    [L\vb{f}(\omega,\vb{k}) - i\sigma_{\chi}\vb{k}\cross \vb{f}(\omega,\vb{k})] -
+    \frac{\sigma^2_{\chi}}{L(L^2-\sigma^2_{\chi}k^2)}\vb{k}[\vb{k}\vdot\vb{f}(\omega,\vb{k})]
+  \end{equation}
+  \item 其中源项$\vb{f}(\omega,\vb{k})$由下式给出:
+    \begin{equation}
+    \vb{f}(\omega,\vb{k}) =
+    \begin{cases}
+    -i\vb{k}\cross\vb{J}_{\text{ext}}(\omega,\vb{k}), & \text{for }\vb{B} \\
+    i\vb{k}\frac{\rho_{\text{ext}}(\omega,\vb{k})}{1+i\sigma/\omega} - i\omega\vb{J}_{\text{ext}}(\omega,\vb{k}), & \text{for }\vb{E}
+    \end{cases}
+    \end{equation}
+  \item 注意到, \eqref{eq:10}式第二项$\sim \sigma^2_{\chi}
+      \vb{k}[\vb{k}\vdot\vb{f}(\omega,\vb{k})]$, 对$\vb{B}$来说是为零的,但
+      是对$\vb{E}$来说, 并不为零. 对于$\vb{E}$, 这一项正比于$\sim
+      [(L^2-\sigma^2_{\chi}k^2)(1+i\sigma/\omega)]^{-1}$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+    \item 我们可以从$\vb{F}(\omega, \vb{k})$的极点(poles), 得到电磁场集体
+        模式(collective modes)的色散关系$\omega(\vb{k})$
+    \item 对于$\vb{B}$, 有$L^2 - \sigma^2_{\chi}k^2 = 0$, 解得:
+    \begin{equation}
+    \omega_{s_1s_2} = -i\sigma/2 + s_1 \sqrt{k^2 + s_2 k \sigma_{\chi} - \sigma^2/4}
+    \end{equation}
+    其中$s_1, s_2 = \pm 1$
+    \item 对于$\vb{E}$, 还有额外的极点: $\omega = -i\sigma$
+    \item 这些极点给出了在没有外源情况下的场的集体模式, 其中$\omega$和
+        $\vb{k}$是独立变量
+    \item 当考虑外部电荷时, 色散关系由于$\omega$和$\vb{k}$的额外的关系, 将
+        会被修改. 例如:在下一节中, 我们将考虑一个沿$z$轴运动的点电荷,这将
+        引入限制$\omega = vk_z$
   \end{itemize}
 \end{frame}
 \end{document}
