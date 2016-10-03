@@ -1,0 +1,118 @@
+% !Mode:: "TeX:UTF-8:Hard"
+
+\documentclass{beamer}
+\usepackage[UTF8,noindent]{ctexcap}
+\usepackage{amsmath}
+\usepackage{physics}
+\usefonttheme[onlymath]{serif}
+
+\title{重离子碰撞中的电磁场}
+\subtitle{GGP 介质的影响}
+\institute{三峡大学理学院}
+\author{艾鑫}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{frame}{目录}
+  \tableofcontents
+\end{frame}
+
+\section{简介}
+\begin{frame}{简介}
+  \begin{itemize}
+  \item 动机: 更加准确的描述重离子碰撞中的电磁场
+  \item 背景: 我们之前已经计算了重离子碰撞中的电磁场, 但是没有考虑 QGP 介质对电磁场的影响, 即我们计算的是真空中的结果
+  \item 问题: 在重离子碰撞后, 真空会被激发, 形成所谓的 QGP. 若 QGP 中存在电导率$\sigma$和手征磁导率$\sigma_{\chi}$,电磁场如何计算?
+  \item 方法: 采用格林函数法, 并假设$\sigma_\chi$远小于$\sigma$的情况下, 推导点电荷在介质中的电磁场公式
+  \end{itemize}
+\end{frame}
+
+\section{场方程与形式解}
+\begin{frame}{Maxwell 方程}
+  \begin{itemize}
+  \item 假设: 考虑一个无限大的均匀介质, 其导电性可以用一个恒定的电导率$\sigma$和手征磁导率$\sigma_{\chi}$来描述
+  \item 在这种情况下, 总电流有三个部分:外部电流, 由电场引入的欧姆电流$\sigma\vb{E}$, 由磁场引入的手征磁电流$\sigma_{\chi} \vb{B}$
+  \item Maxwell 方程为:
+    \begin{align}
+      \div \vb{E} &= \frac{\rho_{\text{ext}}}{\epsilon} \label{eq:max1} \\
+      \div \vb{B} &= 0 \label{eq:max2} \\
+      \curl \vb{E} &= - \partial_t \vb{B} \label{eq:max3} \\
+      \curl \vb{B} &= \partial_t \vb{E} + \vb{J}_{\text{ext}} + \sigma \vb{E} + \sigma_{\chi} \vb{B} \label{eq:max4}
+    \end{align}
+    其中$\rho_{\text{ext}}$和$\vb{J}_{\text{ext}}$分别为外部电荷和外部电流密度
+  \item 需要注意的是, 一般情况下, 电容率(介电常数) $\epsilon (\omega) = 1 + i \sigma / \omega$依赖于频率
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+  \item 对\eqref{eq:max3}式和\eqref{eq:max4}式取旋度, 利用公式
+    \begin{equation}
+      \curl (\curl \vb*{v}) = \grad(\div{\vb*{v}}) - \laplacian{\vb*{v}}
+    \end{equation}
+    有:
+    \begin{gather}
+      \curl{\curl{\vb{E}}} = - \partial_t \curl{\vb{B}} \notag \\
+      \grad (\div{\vb{E}}) - \laplacian{\vb{E}} = - \partial_t (\partial_t \vb{E} + \vb{J}_{\text{ext}} + \sigma \vb{E} + \sigma_{\chi} \vb{B}) \notag \\
+      \frac{1}{\epsilon}\grad\rho_{\text{ext}} - \laplacian \vb{E} = -\partial_t^2 \vb{E} -\partial_t \vb{J}_{\text{ext}} - \sigma \partial_t \vb{E} + \sigma_{\chi} \curl{\vb{E}} \notag \\
+      (\laplacian - \partial_t^2 - \sigma \partial_t) \vb{E} + \sigma_{\chi} \curl{\vb{E}} = \frac{1}{\epsilon} \grad \rho_{\text{ext}} + \partial_t \vb{J}_{\text{ext}} \label{eq:B}
+    \end{gather}
+同理有:
+\begin{equation}
+  (\laplacian - \partial_t^2 - \sigma \partial_t) \vb{B} + \sigma_{\chi} \curl{\vb{B}} = - \curl{\vb{J}_{\text{ext}}} \label{eq:E}
+\end{equation}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+  \item 我们发现, \eqref{eq:B}和\eqref{eq:E}满足同样的偏微分方程:
+    \begin{equation} \label{eq:3}
+      \hat{L} \vb{F}(t, \vb{x}) + \sigma_{\chi} \curl{\vb{F}(t,\vb{x})} = \vb{f}(t,\vb{x})
+    \end{equation}
+    其中$\vb{F}(t,\vb{x})$表示$\vb{B}$或$\vb{E}$. 偏微分算符$\hat{L} = \laplacian - \partial_t^2 - \sigma \partial_t$
+  \item 式\eqref{eq:3}右边的$\vb{f}(t, \vb{x})$表示源项
+  \item 我们可以用矩阵把\eqref{eq:3}表示成分量形式:
+    \begin{equation}
+      \mqty(\hat{L} & -\sigma_{\chi}\partial_z & \sigma_{\chi}\partial_y \\
+      \sigma_{\chi}\partial_z & \hat{L} & -\sigma_{\chi} \partial_x \\
+      -\sigma_{\chi}\partial_y & \sigma_{\chi}\partial_x & \hat{L})
+      \mqty(F_x \\ F_y \\ F_z) (t,\vb{x}) = \mqty(f_x \\ f_y \\ f_z)(t,\vb{x})
+    \end{equation}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+  \item 为了求解上述的方程, 将坐标空间变换到动量空间:
+    \begin{gather}
+      \vb{F}(t,\vb{x}) = \int \frac{\dd{\omega}\dd[3]{\vb{k}}}{{(2\pi)}^4} e^{-i\,\omega t + i\,\vb{k}\vdot\vb{x}} \vb{F}(\omega, \vb{k}) \\
+      \vb{f}(t,\vb{x}) = \int \frac{\dd{\omega}\dd[3]{\vb{k}}}{{(2\pi)}^4} e^{-i\,\omega t + i\,\vb{k}\vdot\vb{x}} \vb{f}(\omega, \vb{k}
+    \end{gather}
+  \item 通过替换$\partial_t \rightarrow -i\,\omega, \nabla \rightarrow i\,\vb{k}$, 动量空间的方程为:
+    \begin{equation}
+      \mqty(L & -i\sigma_{\chi}k_z & i\sigma_{\chi}k_y \\
+      i\sigma_{\chi}k_z & L & -i\sigma_{\chi} k_x \\
+      -i\sigma_{\chi}k_y & i\sigma_{\chi}k_x & L)
+      \mqty(F_x \\ F_y \\ F_z) (\omega,\vb{k}) = \mqty(f_x \\ f_y \\ f_z)(\omega,\vb{k})
+    \end{equation}
+    其中$L = \omega^2 + i\sigma\omega - k^2, k = |\vb{k}|$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+  \item 可以把上式的系数矩阵写成更紧凑的形式:
+    \begin{equation}
+      M_{ij} = L \delta_{ij} - i\sigma_{\chi} \epsilon_{ijl}k_l
+    \end{equation}
+  \item 其行列式为:
+    \begin{equation}
+      \det M = L(L^2 - \sigma_{\chi}^2 k^2)
+    \end{equation}
+
+  \end{itemize}
+\end{frame}
+\end{document}
